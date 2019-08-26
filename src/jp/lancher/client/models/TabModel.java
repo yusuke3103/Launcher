@@ -1,4 +1,4 @@
-package jp.lancher.models;
+package jp.lancher.client.models;
 
 /**
  * タブ

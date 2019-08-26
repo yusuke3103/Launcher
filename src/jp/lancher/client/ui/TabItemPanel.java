@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import jp.lancher.client.models.TabItemModel;
+import jp.lancher.client.models.TabModel;
 import jp.lancher.domain.service.MainFrameService;
-import jp.lancher.models.TabItemModel;
-import jp.lancher.models.TabModel;
 
 public class TabItemPanel extends JPanel {
 

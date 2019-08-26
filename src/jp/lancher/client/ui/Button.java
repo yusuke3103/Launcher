@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import jp.lancher.models.TabItemModel;
+import jp.lancher.client.models.TabItemModel;
 
 public class Button extends JButton {
 

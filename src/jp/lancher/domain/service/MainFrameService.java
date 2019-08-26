@@ -3,12 +3,12 @@ package jp.lancher.domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.lancher.client.models.TabItemModel;
+import jp.lancher.client.models.TabModel;
 import jp.lancher.domain.object.Tab;
 import jp.lancher.domain.object.TabItem;
 import jp.lancher.domain.repository.TabItemRepository;
 import jp.lancher.domain.repository.TabRepository;
-import jp.lancher.models.TabItemModel;
-import jp.lancher.models.TabModel;
 
 public class MainFrameService {
 

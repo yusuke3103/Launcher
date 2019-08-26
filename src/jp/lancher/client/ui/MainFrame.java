@@ -5,8 +5,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import jp.lancher.client.models.TabModel;
 import jp.lancher.domain.service.MainFrameService;
-import jp.lancher.models.TabModel;
 
 public class MainFrame extends JFrame {
 
