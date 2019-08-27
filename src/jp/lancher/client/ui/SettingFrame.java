@@ -6,6 +6,9 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import jp.lancher.client.ui.models.TabTableModel;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -26,7 +29,10 @@ public class SettingFrame extends JFrame {
 	private JLabel lblTabName = new JLabel("タブ名");
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	
+	
 	public SettingFrame() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(299, 316);
 		
 		
@@ -37,7 +43,7 @@ public class SettingFrame extends JFrame {
 		panel.setLayout(null);
 		
 		
-		panel_1.setBounds(6, 6, 266, 83);
+		panel_1.setBounds(6, 6, 270, 83);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -59,19 +65,19 @@ public class SettingFrame extends JFrame {
 		lblTabName.setBounds(6, 49, 61, 16);
 		panel_1.add(lblTabName);
 		
-		panel_2.setBounds(6, 202, 266, 40);
+		panel_2.setBounds(6, 202, 270, 40);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		btnNewButton.setBounds(143, 6, 117, 29);
 		panel_2.add(btnNewButton);
 		
-		panel_3.setBounds(6, 101, 266, 89);
+		panel_3.setBounds(6, 101, 270, 89);
 		panel.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		table.setModel(new DefaultTableModel() {
-			
-		});
+		table.setModel(new TabTableModel());
 		panel_3.add(table);
+		panel_3.add(table.getTableHeader(), BorderLayout.NORTH);
 	}
 }
