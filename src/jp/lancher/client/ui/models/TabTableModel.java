@@ -1,62 +1,79 @@
 package jp.lancher.client.ui.models;
 
+import java.util.Arrays;
+
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+
+import jp.lancher.client.models.TabModel;
 
 public class TabTableModel extends DefaultTableModel {
 
-	private boolean[] columnEditables = {false, false, false};
-	
-	private Class[] columnTypes = {Integer.class, String.class, String.class};
-	
-	private String[] columnNames = {"番号","名前","パス"};
-	
+	public static class ColumnName {
+		public static final String ID = "番号";
+		public static final String TAB_ID = "タブID";
+		public static final String NAME = "名前";
+
+		public static String[] values() {
+			return new String[] { ID, TAB_ID, NAME };
+		}
+	}
+
+	private static boolean[] columnEditables = { false, false, false };
+
+	private static String[] columnNames = ColumnName.values();
+
+	/**
+	 * コンストラクター
+	 */
 	public TabTableModel() {
-		init();
-	}
-	
-	private void init() {
 		
+		super();
+		
+		setColumnIdentifiers(columnNames);
 	}
-	
-	
+
+	/**
+	 * 初期化処理
+	 */
+	private void init() {
+	}
 	
 	@Override
 	public boolean isCellEditable(int row, int column) {
-		// TODO Auto-generated method stub
-		return super.isCellEditable(row, column);
+		return columnEditables[column];
 	}
-	/*
-	new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"\u756A\u53F7", "\u540D\u524D", "\u30D1\u30B9"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				true, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(40);
-		table.getColumnModel().getColumn(0).setMinWidth(40);
-		table.getColumnModel().getColumn(0).setMaxWidth(40);
-		table.getColumnModel().getColumn(1).setPreferredWidth(100);
-		table.getColumnModel().getColumn(1).setMinWidth(100);
-		table.getColumnModel().getColumn(1).setMaxWidth(150);
-		table.getColumnModel().getColumn(2).setResizable(false);
-		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-		table.getColumnModel().getColumn(2).setMinWidth(200);
-		table.getColumnModel().getColumn(2).setMaxWidth(200);
-	*/
+
+	public boolean isCellEditable(String colName) {
+		return columnEditables[getColumnIndex(colName)];
+	}
+
+	private int getColumnIndex(String name) {
+		return Arrays.asList(columnNames).indexOf(name);
+	}
+
+	@Override
+	public void addRow(Object[] rowData) {
+		super.addRow(rowData);
+	}
+
+	/**
+	 * 列追加
+	 * @param model
+	 */
+	public void addRow(TabModel model) {
+		super.addRow(new Object[] { model.getId(), model.getTabId(), model.getName() });
+	}
+
+	public void setValueAt(Object aValue, int row, String name) {
+		super.setValueAt(aValue, row, getColumnIndex(name));
+	}
+	
+	public Object getValueAt(int row, String name) {
+		return super.getValueAt(row, getColumnIndex(name));
+	}
+	
+	
+	
 }

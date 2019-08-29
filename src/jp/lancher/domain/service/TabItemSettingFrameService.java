@@ -2,36 +2,19 @@ package jp.lancher.domain.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import jp.lancher.client.models.TabItemModel;
 import jp.lancher.client.models.TabModel;
 import jp.lancher.domain.object.Tab;
 import jp.lancher.domain.object.TabItem;
 import jp.lancher.domain.repository.TabItemRepository;
-import jp.lancher.domain.repository.TabRepository;
 
-public class MainFrameService {
+public class TabItemSettingFrameService {
 
-	private TabRepository tabRepository = new TabRepository();
 	private TabItemRepository tabItemRepository = new TabItemRepository();
 
-	public List<TabModel> getTabs() throws Exception {
-
-		List<TabModel> models = new ArrayList<TabModel>();
-		List<Tab> tabs = tabRepository.findAll();
-
-		for (Tab tab : tabs) {
-			TabModel model = new TabModel();
-			model.setId(tab.getId());
-			model.setName(tab.getName());
-			model.setTabId(tab.getTabId());
-			models.add(model);
-		}
-
-		return models;
-	}
-	
-	public List<TabItemModel> getTabItems() throws Exception {
+	public List<TabItemModel> getInitData() throws Exception {
 
 		List<TabItemModel> models = new ArrayList<TabItemModel>();
 		List<TabItem> tabItems = tabItemRepository.findAll();
@@ -47,4 +30,29 @@ public class MainFrameService {
 
 		return models;
 	}
+
+	public void regist(Vector vec) throws Exception {
+
+		List<TabItem> items = new ArrayList<TabItem>();
+
+		for (int i = 0; i < vec.size(); i++) {
+
+			Vector v = (Vector) vec.get(i);
+
+			String tabId = (String) v.get(0);
+			int rno = (int) v.get(1);
+			String name = (String) v.get(2);
+			String path = (String) v.get(3);
+
+			TabItem item = new TabItem();
+			item.setTabId(tabId);
+			item.setRno(rno);
+			item.setName(name);
+			item.setPath(path);
+			items.add(item);
+		}
+		tabItemRepository.update(items);
+
+	}
+
 }

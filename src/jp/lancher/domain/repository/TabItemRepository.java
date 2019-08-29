@@ -37,4 +37,27 @@ public class TabItemRepository {
 		return tabItems;
 	}
 
+	public void update(List<TabItem> items) {
+		try {
+
+			String sql = "UPDATE SET NAME = ?, PATH = ? FROM M_TAB_ITEM WHERE TAB_ID = ? AND RNO = ?";
+
+			for (TabItem item : items) {
+			
+				Object[] params = new Object[4];
+				params[0] = item.getName();
+				params[1] = item.getPath();
+				params[2] = item.getTabId();
+				params[3] = item.getRno();
+
+				DBUtil.execute(sql, params);
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
+
 }

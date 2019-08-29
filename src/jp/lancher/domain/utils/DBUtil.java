@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,5 +65,28 @@ public class DBUtil {
 		}
 
 		return results;
+	}
+
+	public static void execute(String sql, Object[] params) {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			
+			con = getConnection();
+			stmt = con.prepareStatement(sql);
+			
+			int i = 0;
+			for (Object param : params) {
+				stmt.setObject(++i, param);
+			}
+			
+			stmt.execute();
+			System.out.println(sql + "[" + Arrays.toString(params) + "]");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }
